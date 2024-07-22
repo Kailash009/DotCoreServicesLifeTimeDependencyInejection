@@ -1,0 +1,77 @@
+﻿Life time or Services in dot net core:-
+----------------------------------------------
+The lifecycle of a .NET Core application and its components, such as services, is crucial for understanding how the framework manages resources and dependencies. 
+In .NET Core, services can be categorized based on their lifetimes, which determine how they are instantiated and managed by the dependency injection (DI) container. The main types of services are:
+Transient Services
+Scoped Services
+Singleton Services
+Service Lifetimes in .NET Core:-
+Service lifetimes determine how services are instantiated and managed by the dependency injection (DI) container in .NET Core. The three main lifetimes are:
+Transient:
+>> Transient services are created each time they are requested.
+>> Use this lifetime for lightweight, stateless services.
+services.AddTransient<IMyService, MyService>();
+Scoped:
+>> Scoped services are created once per client request (connection).
+>> Use this lifetime for services that need to maintain state within a single request but should be discarded afterwards.
+services.AddScoped<IMyService, MyService>();
+Singleton:
+>> Singleton services are created the first time they are requested and then every subsequent request will use the same instance.
+>> Use this lifetime for services that maintain state across the entire application lifecycle.
+services.AddSingleton<IMyService, MyService>();
+Detailed Use Cases
+>> Transient Services: Use for lightweight operations, such as data transformation or formatting tasks that do not require shared state.
+>> Scoped Services: Use for database contexts or business logic that must maintain state during a single request. This is common with Entity Framework Core's DbContext.
+>> Singleton Services: Use for caching, configuration data, or logging services that need to be available throughout the application's lifetime.
+Additional Considerations
+Thread Safety: Ensure that singleton services are thread-safe because they are shared across multiple requests and threads.
+Disposing Services: The DI container will automatically dispose of services with scoped or transient lifetimes at the end of the request.
+Performance: Singleton services can improve performance by reducing the overhead of creating new instances, but they can also lead to higher memory usage if not managed correctly.
+By understanding and correctly implementing the lifetimes of services, you can manage resources effectively and ensure your .NET Core application is robust, efficient, and scalable.
+1. Transient Services
+Transient services are created each time they are requested. This is suitable for lightweight, stateless services that do not hold any data between requests.
+2. Scoped Services
+Scoped services are created once per request. This is suitable for services that need to maintain state during a single request but should be discarded afterwards.
+3. Singleton Services
+Singleton services are created the first time they are requested and then every subsequent request will use the same instance. This is suitable for services that maintain state across the entire application's lifetime.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Singleton: IoC container will create and share a single instance of a service throughout the application's lifetime.
+Transient: The IoC container will create a new instance of the specified service type every time you ask for it.
+Scoped: IoC container will create an instance of the specified service type once per request and will be shared in a single request.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
